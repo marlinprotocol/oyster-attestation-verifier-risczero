@@ -33,9 +33,9 @@ async fn main() -> std::io::Result<()> {
 
     let handle_1 = tokio::spawn(async {
 
-        let start_block = start_block.parse().expect("Can not parse start_block");
-        let chain_id = chain_id.parse().expect("Can not parse chain _id");
-        let max_parallel_proofs = max_parallel_proofs.parse().unwrap_or_else(|_| 1);
+        let start_block: u64 = start_block.parse().expect("Can not parse start_block");
+        let chain_id: u64 = chain_id.parse().expect("Can not parse chain _id");
+        let max_parallel_proofs: usize = max_parallel_proofs.parse().unwrap_or_else(|_| 1);
         log::info!("Start Block: {}, Max Parallel Requests: {}", start_block.clone(), max_parallel_proofs.clone());
 
         let listener =
