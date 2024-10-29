@@ -27,3 +27,4 @@ env_logger = "0.10"
 tokio = { version = "1", features = ["full"] }
 kalypso_listener = { git = "https://github.com/marlinprotocol/kalypso-unified.git", branch = "listener-refined", package = "listener" }
 kalypso_helper = { git = "https://github.com/marlinprotocol/kalypso-unified.git", branch = "listener-refined", package = "helper" }
+anyhow = "1.0.86"
