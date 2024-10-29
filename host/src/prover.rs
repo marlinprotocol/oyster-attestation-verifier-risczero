@@ -31,7 +31,7 @@ async fn main() -> std::io::Result<()> {
 
     let mut handles = vec![];
 
-    let handle_1 = tokio::spawn(async {
+    let handle_1 = tokio::spawn(async move {
 
         let start_block: u64 = start_block.parse().expect("Can not parse start_block");
         let chain_id: u64 = chain_id.parse().expect("Can not parse chain _id");
