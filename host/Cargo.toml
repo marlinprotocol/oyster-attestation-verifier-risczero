@@ -3,6 +3,14 @@ name = "host"
 version = "0.1.0"
 edition = "2021"
 
+[[bin]]
+name = "host"
+path = "src/main.rs"
+
+[[bin]]
+name = "prover"
+path = "src/prover.rs"
+
 [dependencies]
 methods = { path = "../methods" }
 risc0-zkvm = { version = "1.1.2", features = ["cuda"] }
@@ -11,3 +19,11 @@ serde = "1.0"
 ureq = "2.10.1"
 clap = { version = "4.5.20", features = ["derive"] }
 hex = "0.4.3"
+actix-web = "4.5.1"
+serde_json = "1.0"
+ethers ={version = "2.0.10", features = ["abigen", "ws", "rustls"] }
+dotenv = "0.15"
+env_logger = "0.10"
+tokio = { version = "1", features = ["full"] }
+kalypso_listener = { git = "https://github.com/marlinprotocol/kalypso-unified.git", branch = "listener-refined", package = "listener" }
+kalypso_helper = { git = "https://github.com/marlinprotocol/kalypso-unified.git", branch = "listener-refined", package = "helper" }
