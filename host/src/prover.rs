@@ -1,7 +1,14 @@
 mod handler;
 mod server;
-use std::env;
-use std::fs;
+// use std::env;
+// use std::fs;
+use dotenv::dotenv;
+
+macro_rules! env_var {
+    ($var:ident, $key:expr) => {
+        let $var = std::env::var($key).expect(&format!("{} is not set", $key));
+    };
+}
 
 #[tokio::main]
 async fn main() -> std::io::Result<()> {

@@ -19,6 +19,8 @@ serde = "1.0"
 ureq = "2.10.1"
 clap = { version = "4.5.20", features = ["derive"] }
 hex = "0.4.3"
+log = "0.4"
+anyhow = "1.0.86"
 actix-web = "4.5.1"
 serde_json = "1.0"
 ethers ={version = "2.0.10", features = ["abigen", "ws", "rustls"] }
@@ -27,4 +29,4 @@ env_logger = "0.10"
 tokio = { version = "1", features = ["full"] }
 kalypso_listener = { git = "https://github.com/marlinprotocol/kalypso-unified.git", branch = "listener-refined", package = "listener" }
 kalypso_helper = { git = "https://github.com/marlinprotocol/kalypso-unified.git", branch = "listener-refined", package = "helper" }
-anyhow = "1.0.86"
+kalypso_generator_models = { git = "https://github.com/marlinprotocol/kalypso-unified.git", branch = "listener-refined", package = "generator" }

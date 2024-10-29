@@ -1,12 +1,11 @@
-use actix_web::web::Data;
 use actix_web::{get, http::StatusCode, post, web, HttpResponse, Responder};
 use ethers;
 use clap::Parser;
 use methods::{GUEST_ELF, GUEST_ID};
 use risc0_zkvm::{default_prover, ExecutorEnv, ProverOpts};
 use kalypso_helper::response::response;
-use serde_json::{Error, Value};
-use std::sync::{Arc, Mutex};
+// use serde_json::{Error, Value};
+// use std::sync::{Arc, Mutex};
 use serde::{Deserialize, Serialize};
 
 #[derive(Parser, Serialize, Debug, Deserialize, Clone)]
@@ -42,7 +41,7 @@ async fn generate_proof(
     );
 
     // let args = Args::parse();
-    let args: Args = serde_json::from(payload.0);
+    let args= payload.0;
 
     // Query attestation from the given url
     let mut attestation = Vec::new();
@@ -76,7 +75,7 @@ async fn generate_proof(
 
     let value = vec![
         ethers::abi::Token::Bytes(seal),
-        ethers::abi::Token::Bytes(image_id),
+        ethers::abi::Token::Bytes(image_id.to_vec()),
         ethers::abi::Token::Bytes(journal),
     ];
     let encoded = ethers::abi::encode(&value);

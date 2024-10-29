@@ -1,7 +1,7 @@
 use crate::handler;
-use actix_web::web::Data;
+// use actix_web::web::Data;
 use actix_web::{App, HttpServer};
-use std::sync::{Arc, Mutex};
+// use std::sync::{Arc, Mutex};
 use std::time::Duration;
 
 pub struct ProvingServer {
