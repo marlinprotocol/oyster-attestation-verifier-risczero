@@ -35,10 +35,10 @@ async fn generate_proof(
         .with_env_filter(tracing_subscriber::filter::EnvFilter::from_default_env())
         .init();
 
-    println!(
-        "GUEST: 0x{}",
-        hex::encode(GUEST_ID.map(u32::to_le_bytes).as_flattened())
-    );
+    // println!(
+    //     "GUEST: 0x{}",
+    //     hex::encode(GUEST_ID.map(u32::to_le_bytes).as_flattened())
+    // );
 
     // let args = Args::parse();
     let args= payload.0;
@@ -69,8 +69,9 @@ async fn generate_proof(
 
     println!("{:?}", receipt);
 
-    let seal = receipt.inner.groth16().unwrap().seal;
-    let image_id = GUEST_ID.map(u32::to_le_bytes).as_flattened();
+    let seal = receipt.inner.groth16().unwrap().seal.clone();
+    let guest = GUEST_ID.map(u32::to_le_bytes);
+    let image_id = guest.as_flattened();
     let journal = receipt.journal.bytes;
 
     let value = vec![

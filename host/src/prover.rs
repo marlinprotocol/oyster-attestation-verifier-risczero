@@ -27,16 +27,16 @@ async fn main() -> std::io::Result<()> {
     env_var!(ivs_url, "IVS_URL");
     env_var!(prover_url, "PROVER_URL");
 
-    let start_block = start_block.parse().expect("Can not parse start_block");
-    let chain_id = chain_id.parse().expect("Can not parse chain _id");
-    let max_parallel_proofs = max_parallel_proofs.parse().unwrap_or_else(|_| 1);
     let port: u16 = prover_url.parse().unwrap();
 
     let mut handles = vec![];
 
     let handle_1 = tokio::spawn(async {
 
-        // log::info!("Start Block: {}, Max Parallel Requests: {}", start_block, max_parallel_proofs);
+        let start_block = start_block.parse().expect("Can not parse start_block");
+        let chain_id = chain_id.parse().expect("Can not parse chain _id");
+        let max_parallel_proofs = max_parallel_proofs.parse().unwrap_or_else(|_| 1);
+        log::info!("Start Block: {}, Max Parallel Requests: {}", start_block.clone(), max_parallel_proofs.clone());
 
         let listener =
         kalypso_listener::job_creator::JobCreator::simple_listener_for_non_confidential_prover(
