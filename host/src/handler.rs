@@ -7,8 +7,9 @@ use risc0_zkvm::{default_prover, ExecutorEnv, ProverOpts};
 use kalypso_helper::response::response;
 use serde_json::{Error, Value};
 use std::sync::{Arc, Mutex};
+use serde::{Deserialize, Serialize};
 
-#[derive(Parser, Debug)]
+#[derive(Parser, Serialize, Debug, Deserialize, Clone)]
 #[command(author, version, about, long_about = None)]
 struct Args {
     #[arg(short, long)]
