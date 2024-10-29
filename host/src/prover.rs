@@ -36,7 +36,7 @@ async fn main() -> std::io::Result<()> {
 
     let handle_1 = tokio::spawn(async {
 
-        log::info!("Start Block: {}, Max Parallel Requests: {}", start_block, max_parallel_proofs);
+        // log::info!("Start Block: {}, Max Parallel Requests: {}", start_block, max_parallel_proofs);
 
         let listener =
         kalypso_listener::job_creator::JobCreator::simple_listener_for_non_confidential_prover(

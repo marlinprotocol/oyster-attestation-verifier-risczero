@@ -79,11 +79,11 @@ async fn generate_proof(
         ethers::abi::Token::Bytes(journal),
     ];
     let encoded = ethers::abi::encode(&value);
-    return Ok::<HttpResponse, E>(HttpResponse::Ok().json(
+    return HttpResponse::Ok().json(
         kalypso_generator_models::models::GenerateProofResponse {
             proof: encoded.to_vec(),
         },
-    ));
+    );
 }
 
 // Routes
