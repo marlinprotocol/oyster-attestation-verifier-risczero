@@ -8,7 +8,7 @@ name = "host"
 path = "src/main.rs"
 
 [[bin]]
-name = "prover"
+name = "kalypso-attestation-prover"
 path = "src/prover.rs"
 
 [dependencies]

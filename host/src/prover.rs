@@ -27,8 +27,6 @@ async fn main() -> std::io::Result<()> {
     env_var!(ivs_url, "IVS_URL");
     env_var!(prover_url, "PROVER_URL");
 
-    let port: u16 = prover_url.parse().unwrap();
-
     let mut handles = vec![];
 
     let handle_1 = tokio::spawn(async move {
@@ -52,13 +50,14 @@ async fn main() -> std::io::Result<()> {
             ivs_url,
             false,
             max_parallel_proofs,
+            true
         );
 
         listener.run().await
     });
     handles.push(handle_1);
 
-    let handle_2 = tokio::spawn(server::ProvingServer::new(port).start_server());
+    let handle_2 = tokio::spawn(server::ProvingServer::new(3030 as u16).start_server());
     handles.push(handle_2);
 
     for handle in handles {

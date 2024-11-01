@@ -27,30 +27,12 @@ async fn test() -> impl Responder {
 
 #[post("/generateProof")]
 async fn generate_proof(
-    payload: web::Json<Args>,
+    payload: web::Json<kalypso_generator_models::models::InputPayload>
 ) -> impl Responder {
     log::info!("Request received by the risc0 prover");
 
-    tracing_subscriber::fmt()
-        .with_env_filter(tracing_subscriber::filter::EnvFilter::from_default_env())
-        .init();
-
-    // println!(
-    //     "GUEST: 0x{}",
-    //     hex::encode(GUEST_ID.map(u32::to_le_bytes).as_flattened())
-    // );
-
-    // let args = Args::parse();
-    let args= payload.0;
-
     // Query attestation from the given url
-    let mut attestation = Vec::new();
-    ureq::get(&args.url)
-        .call()
-        .unwrap()
-        .into_reader()
-        .read_to_end(&mut attestation)
-        .unwrap();
+    let attestation = payload.get_public();
 
     println!("Attestation size: {}", attestation.len());
 
@@ -69,14 +51,17 @@ async fn generate_proof(
 
     println!("{:?}", receipt);
 
-    let seal = receipt.inner.groth16().unwrap().seal.clone();
+    // let seal = receipt.inner.groth16().unwrap().seal.clone(); 
+    
+    // prefix 50bd1769 bytes to seal, og seal wont work on contracts
+    let seal_with_prefix: Vec<u8> = vec![0x50, 0xBD, 0x17, 0x69].into_iter().chain(receipt.inner.groth16().unwrap().seal.clone()).collect();
     let guest = GUEST_ID.map(u32::to_le_bytes);
     let image_id = guest.as_flattened();
     let journal = receipt.journal.bytes;
 
     let value = vec![
-        ethers::abi::Token::Bytes(seal),
-        ethers::abi::Token::Bytes(image_id.to_vec()),
+        ethers::abi::Token::Bytes(seal_with_prefix),
+        ethers::abi::Token::FixedBytes(image_id.to_vec()),
         ethers::abi::Token::Bytes(journal),
     ];
     let encoded = ethers::abi::encode(&value);

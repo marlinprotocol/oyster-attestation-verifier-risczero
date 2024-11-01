@@ -69,6 +69,39 @@ project_name
         └── lib.rs
 ```
 
+## Kalypso Prover
+Provers can generate proofs or attestation requests on kalypso and earn rewards
+
+```bash
+touch .env
+```
+`.env` file should contain
+
+```
+GENERATOR_ADDRESS=<<generatorAddress>>
+GAS_KEY=<<gas key>>
+MARKET_ID=10
+HTTP_RPC_URL=https://arb-sepolia.g.alchemy.com/v2/<<apikey>>
+PROOF_MARKETPLACE_ADDRESS=0x0b6340a893B944BDc3B4F012e934b724c83abF97
+GENERATOR_REGISTRY_ADDRESS=0x5ce3e1010028C4F5687356D721e3e2B6DcEA7C25
+START_BLOCK=92423485
+CHAIN_ID=421614
+MAX_PARALLEL_PROOFS=1
+IVS_URL=http://3.110.146.109:3030
+PROVER_URL=http://localhost:3030/api/generateProof
+```
+
+#### Build the prover
+```rust
+cargo build --release
+```
+
+#### Run the prover
+The prover automatically detect the requests assigned to the your `generatorAddress` and submit proofs to kalypso and earns rewards.
+```bash
+./target/release/kalypso-attestation-prover
+```
+
 ## License
 
 This repository is licensed under the GNU AGPLv3 or any later version. See [LICENSE.txt](./LICENSE.txt).
