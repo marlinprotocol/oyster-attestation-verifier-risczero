@@ -1,5 +1,9 @@
 ![Marlin Oyster Logo](./logo.svg)
 
+# Archival
+
+Archived in favour of https://github.com/marlinprotocol/oyster-monorepo
+
 # Attestation Verifier - RiscZero
 
 This repository implements a RiscZero based AWS Nitro Enclave attestation verifier.
